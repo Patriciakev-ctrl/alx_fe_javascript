@@ -12,19 +12,22 @@ function showRandomQuote() {
 
 function createAddQuoteForm() {
     const form = document.createElement("form");
-    const labelForText = document.createElement("label");
-    labelForText.innerHTML = "Quote Text";
+    
     const inputForText = document.createElement("input");
     inputForText.setAttribute("type","text");
+    inputForText.setAttribute("placeholder","Enter a new quote");
+    inputForText.setAttribute("id","newQuoteText");
 
-    const labelForCategory = document.createElement("label");
-    labelForCategory.innerHTML = "Quote Category";
+    
     const inputForCategory = document.createElement("input");
-    inputForText.setAttribute("type","text");
+    inputForCategory.setAttribute("type","text");
+    inputForCategory.setAttribute("placeholder","Enter quote category");
+    inputForCategory.setAttribute("id","newQuoteCalegory");
 
     const button = document.createElement("button");
-    button.innerHTML = "Create";
-
+    button.innerHTML = "Add Quote";
+    button.setAttribute("onclick","addQuote()");
+    
     form.appendChild(labelForText);
     form.appendChild(inputForText);
     form.appendChild(labelForCategory);
@@ -35,4 +38,6 @@ function createAddQuoteForm() {
 
 }
 
-createAddQuoteForm();
+newQuote.addEventListener("click", ()=>{});
+
+//createAddQuoteForm();
