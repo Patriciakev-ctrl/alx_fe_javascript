@@ -82,10 +82,19 @@ function importFromJsonFile(event) {
     fileReader.onload = function(event) {
       const importedQuotes = JSON.parse(event.target.result);
       quotes.push(...importedQuotes);
-      saveQuotes();
+      const quotesArray = importedQuotes.split('\n').map(quote => quote.trim()).filter(quote => quote);
+    
+      // Create a JSON object
+      const jsonData = JSON.stringify(quotesArray, null, 2);
+  
+      // Create a Blob with the JSON data
+      const blob = new Blob([jsonData], { type: 'application/json' });
+     addItem(quotesArray)
       alert('Quotes imported successfully!');
     };
     fileReader.readAsText(event.target.files[0]);
+
+      
   }
 
 
