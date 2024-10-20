@@ -1,0 +1,33 @@
+#quote-list{
+    display: none;
+}
+div{
+    margin: 50px 50px 50px 50px;
+    padding: 20px 30px;
+}
+button{
+    background-color: #007bff;
+    
+}
+button:hover{
+    background-color: #0056b3;
+}
+input{
+    display: block;
+    margin: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #eeeeee;
+    margin-top: 8px;
+    padding: 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
