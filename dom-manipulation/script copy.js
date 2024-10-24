@@ -9,17 +9,6 @@ function getQuotes() {
     return quotes;
 }
 
- //to add one item to localstorage
- function addQuote() {
-    
-    let items = getQuotes();
-    items.push();
-    console.log(items);
-    localStorage.setItem("quote",JSON.stringify(items));
-    alert("This the input value:  "+inputForText.value);
-}
-
-
 //to show randomly a quote from the localstorage
 function showRandomQuote(arrayQuote) {
     let randomNumber = 99*(Math.random());
@@ -28,7 +17,6 @@ function showRandomQuote(arrayQuote) {
 
 //create a form dynamically using DOM, with a simple listener
 function createAddQuoteForm() {
-    newQuote.style.display = "none";
     const form = document.createElement("form");
 
     
@@ -36,7 +24,7 @@ function createAddQuoteForm() {
     inputForText.type = "text";
     inputForText.placeholder = "Enter a new quote";
     inputForText.id = "newQuoteText";
-
+alert("This the input value:  "+inputForText.value);
     
     const inputForCategory = document.createElement("input");
     inputForCategory.type = "text";
@@ -52,24 +40,29 @@ function createAddQuoteForm() {
     form.appendChild(inputForCategory);
     form.appendChild(button);
     quoteDisplay.appendChild(form);
+    newQuote.style.display = "none";
+   
+
+    //to add one item to localstorage
+    function addQuote() {
     
-    button.onclick = function addQuote(){ 
         let items = getQuotes();
         items.push({quote:document.getElementById("newQuoteText").value, category:document.getElementById("newQuoteCategory").value});
         console.log(items);
         localStorage.setItem("quote",JSON.stringify(items));
         alert("This the input value:  "+inputForText.value);
-    };
+    }
+    button.onclick = addQuote();
 
 }
-//Call the form creation after the click event on the button
-    newQuote.addEventListener("click",()=>{createAddQuoteForm();
-});
 
-//Load all the stored quotes while the page is charging
-document.addEventListener("DOMContentLoaded", ()=>{
-        const quotes = getQuotes();
-        quotes.forEach(element => {
+
+    newQuote.addEventListener("click", ()=>{
+        createAddQuoteForm();
+    
+
+    const quotes = getQuotes();
+    quotes.forEach(element => {
         const ul = document.createElement("ul");
         const newQuote = document.createElement("li");
             newQuote.innerHTML = "<i>"+element.quote+"</i>"+"<br/>"+"<em>"+element.category+"</em>";
@@ -84,4 +77,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             quoteDisplay.appendChild(ul);
             quoteDisplay.style.display = "block";
     });
- });
+})
+
+
+//createAddQuoteForm();
