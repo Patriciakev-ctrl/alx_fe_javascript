@@ -2,10 +2,12 @@
 const quoteDisplay = document.getElementById("quoteDisplay");
 //to store the new quote
 const newQuote = document.getElementById("newQuote");
+//store all the quotes
+let quotes;
 
 //to get items from the localstorage
 function getQuotes() {
-    const quotes = JSON.parse(localStorage.getItem("quote")) || [];
+    quotes = JSON.parse(localStorage.getItem("quote")) || [];
     return quotes;
 }
 
@@ -85,3 +87,41 @@ document.addEventListener("DOMContentLoaded", ()=>{
             quoteDisplay.style.display = "block";
     });
  });
+ function importFromJsonFile(event) {
+    const fileReader = new FileReader();
+    fileReader.onload = function(event) {
+      const importedQuotes = JSON.parse(event.target.result);
+      quotes.push(...importedQuotes);
+      localStorage.setItem("quote",JSON.stringify(quotes));
+      alert('Quotes imported successfully!');
+    };
+    fileReader.readAsText(event.target.files[0]);
+  }
+
+  document.getElementById("exportFile").addEventListener("click",()=>{
+
+//convert quotes into JSON Object
+const quotesJson = JSON.stringify(quotes);
+
+//convert the JSON Object into BLOB Object
+const quotesBlob = new Blob([quotesJson], {type: 'application/json'});
+
+//create the download link
+const url = URL.createObjectURL(quotesBlob);
+
+//create the download link
+const a = document.createElement("a");
+a.href = url;
+//set the downloaded file name
+a.download = "quotes.json";
+
+//append the link
+document.body.appendChild(a);
+a.click();
+
+//remove the link after download it
+document.body.removeChild(a);
+URL.revokeObjectURL(url);
+
+
+  })
